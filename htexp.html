@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Define the invitation card template using CSS */
+        .invitation-card {
+            width: 400px;
+            height: 200px;
+            background-color: #FDFDFD;
+            border: 1px solid #000;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-card">
+        <h1>Invitation to</h1>
+        <h2 id="name">John Doe</h2>
+    </div>
+    <button onclick="downloadCard()">Download Card</button>
+
+    <script>
+        function downloadCard() {
+            // Get the name entered by the user (you can replace this with a form input)
+            const name = document.getElementById("name").innerText;
+
+            // Create a canvas element to render the invitation card
+            const canvas = document.createElement("canvas");
+            canvas.width = 400;
+            canvas.height = 200;
+            const context = canvas.getContext("2d");
+
+            // Draw the invitation card template
+            context.fillStyle = "#FDFDFD";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.font = "24px Arial";
+            context.fillStyle = "#000";
+            context.fillText("Invitation to", 100, 70);
+            context.fillText(name, 150, 120);
+
+            // Convert the canvas to a data URL (PNG)
+            const dataURL = canvas.toDataURL("image/png");
+
+            // Create a download link for the image
+            const link = document.createElement("a");
+            link.href = dataURL;
+            link.download = "invitation.png";
+            link.click();
+        }
+    </script>
+</body>
+</html>
